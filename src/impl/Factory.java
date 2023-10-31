@@ -13,7 +13,6 @@ public final class Factory implements IFactory {
     private static IFactory factoryInstance = null;
 
     private Factory() {
-
     }
 
     /**
@@ -30,7 +29,7 @@ public final class Factory implements IFactory {
     @Override
     public IDoubleStack makeDoubleStack(int maxSize) {
         // TODO need to implement this
-        return null;
+        return new DoubleStack(maxSize);
     }
 
     @Override
