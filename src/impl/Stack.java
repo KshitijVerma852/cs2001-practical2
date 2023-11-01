@@ -7,23 +7,23 @@ import interfaces.IStack;
 public class Stack implements IStack {
     private final Object[] sharedArray;
     private final int maxSize;
-    private int numOfElements;
+    private int size;
     private final int bottomElementIndex;
 
     public Stack(Object[] elements, boolean isFirstStack) {
         sharedArray = elements;
         maxSize = elements.length / 2;
-        numOfElements = 0;
+        size = 0;
         bottomElementIndex = isFirstStack ? 0 : maxSize;
     }
 
     @Override
     public void push(Object element) throws StackOverflowException {
-        if (numOfElements == maxSize) {
+        if (size == maxSize) {
             throw new StackOverflowException();
         } else {
-            sharedArray[numOfElements + bottomElementIndex] = element;
-            numOfElements++;
+            sharedArray[size + bottomElementIndex] = element;
+            size++;
         }
     }
 
@@ -32,9 +32,9 @@ public class Stack implements IStack {
         if (isEmpty()) {
             throw new StackEmptyException();
         } else {
-            numOfElements--;
-            Object ans = sharedArray[numOfElements + bottomElementIndex];
-            sharedArray[numOfElements + bottomElementIndex] = null;
+            size--;
+            Object ans = sharedArray[size + bottomElementIndex];
+            sharedArray[size + bottomElementIndex] = null;
             return ans;
         }
     }
@@ -44,22 +44,22 @@ public class Stack implements IStack {
         if (isEmpty()) {
             throw new StackEmptyException();
         } else {
-            return sharedArray[bottomElementIndex + numOfElements - 1];
+            return sharedArray[bottomElementIndex + size - 1];
         }
     }
 
     @Override
     public int size() {
-        return numOfElements;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return numOfElements == 0;
+        return size == 0;
     }
 
     @Override
     public void clear() {
-        numOfElements = 0;
+        size = 0;
     }
 }
