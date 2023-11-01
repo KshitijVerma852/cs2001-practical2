@@ -5,16 +5,16 @@ import common.StackOverflowException;
 import interfaces.IStack;
 
 public class Stack implements IStack {
-    private Object[] sharedArray;
-    private int maxSize;
+    private final Object[] sharedArray;
+    private final int maxSize;
     private int numOfElements;
-    private int bottomElementIndex;
+    private final int bottomElementIndex;
 
     public Stack(Object[] elements, boolean isFirstStack) {
         sharedArray = elements;
         maxSize = elements.length / 2;
         numOfElements = 0;
-        bottomElementIndex = isFirstStack ? 0 : maxSize / 2;
+        bottomElementIndex = isFirstStack ? 0 : maxSize;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Stack implements IStack {
         if (isEmpty()) {
             throw new StackEmptyException();
         } else {
-            return sharedArray[numOfElements - 1];
+            return sharedArray[bottomElementIndex + numOfElements - 1];
         }
     }
 
